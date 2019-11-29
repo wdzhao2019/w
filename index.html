@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>J & W</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="keywords" content="JXFAN, WDZHAO, J&W, W&J" />
+<meta name="description" content="jfan.ca,jxfan.ca,wzhao.ca,wdzhao.ca" />
+<meta name="p:domain_verify" content="fe3af0cec02c8bf6de660e72b794c9c5" />
+<link href="favicon.ico" rel="icon" type="image/ico" /> 
+<link href="favicon.ico" rel="shortcut icon" />
+<link href="css/jw.css" rel="stylesheet" />
+<link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css" />
+<link href="http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/vue.js"></script>
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<div id="jw">
+
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32 w3-header-bg">
+  <h6><b>&nbsp;</b></h6>
+  <a href="/"><img src="images/logo.png" alt="J & W" /></a>
+  <h1><b>&nbsp;</b></h1>
+  <p><span class="w3-tag"><a href="https://jfan.ca">jfan.ca</a></span>&nbsp;|&nbsp;<span class="w3-tag"><a href="https://wzhao.ca">wzhao.ca</a></span></p>
+</header>
+
+<!-- Grid -->
+<div class="w3-row">
+
+<!-- Blog entries -->
+<div class="w3-col l8 s12">
+  <!-- Blog entry -->
+  <div v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
+  <div v-if="year_loaded[blog.publishedAt.substring(0,4)]">
+  <div class="w3-card-4 w3-margin w3-white" :id="blog.publishedAt">
+    <img :src="'https://2013.wj9.ca/images/' + blog.image" alt="Blog Image" style="width:100%">
+    <div class="w3-container">
+      <p>&nbsp;</p>
+      <h3><b>{{ blog.title }}</b></h3>
+      <h5><span class="w3-opacity">{{ blog.publishedAt }}</span></h5>
+      <h4><span class="w3-greyscale" v-html="blog.description">{{ blog.description }}</span></h4>
+      <p>&nbsp;</p>
+    </div>
+    <div class="w3-container">
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+          <p><button class="w3-button w3-padding-small w3-white w3-border" @click="blog.show = !blog.show"><b>{{blog.show ? '«' : 'Read more »'}}</b></button></p>
+        </div>
+        <div class="w3-col m4 w3-hide-small">
+          <p><span class="w3-padding-small w3-right"><b>By  </b> <span class="w3-tag">{{ blog.author }}</span></span></p>
+        </div>
+      </div>
+      <div v-if="blog.show">
+      <p>&nbsp;</p>
+      <p v-html="blog.body.join('<br />')"> {{ blog.body.join('<br />') }} </p>
+      <p>&nbsp;</p>
+      </div>
+    </div>
+  </div>
+  <hr>      
+  </div>
+  </div>
+<!-- END BLOG ENTRIES -->
+</div>
+
+<!-- Introduction menu -->
+<div class="w3-col l4">
+  <!-- Recently Posts -->
+  <div class="w3-card w3-margin">
+    <div class="w3-container w3-padding">
+      <h4>Recently Posts</h4>
+    </div>
+    <ul class="w3-ul w3-hoverable w3-white" v-for="(blog, index) in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
+      <a :href="'#' + blog.publishedAt" v-if="index<5">
+        <li class="w3-padding-16">
+          <img :src="'https://2013.wj9.ca/images/' + blog.image" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <span>{{ blog.publishedAt }}</span><br />
+          <span class="w3-large">{{ blog.title }}</span><br>
+        </li>
+      </a>
+    </ul>
+  </div>
+  <hr> 
+ 
+  <!-- Archives -->
+  <div class="w3-card w3-margin">
+    <div class="w3-container w3-padding">
+      <h4>Archives</h4>
+    </div>
+    <div class="w3-container w3-white">
+      <div v-for="yearIndex in 7">
+      <span class="w3-tag w3-white w3-large w3-margin-top"><span class="jw">&nbsp;</span>
+      <button class="w3-button w3-padding-small w3-white w3-border" @click="loadJsonFiles(2020-yearIndex)">
+      {{ (2020-yearIndex).toString() + ' ' + (year_loaded[(2020-yearIndex).toString()] ? '«' : '»') }}
+      </button>
+      </span> 
+      <p class="w3-light-grey">
+        <div v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
+        <span class="w3-light-grey w3-medium jw-jw" v-if="blog.publishedAt.startsWith((2020-yearIndex).toString())"><span class="jw-wj">&nbsp;</span><a :href="'#' + blog.publishedAt">{{ blog.publishedAt + ' ' + blog.title }}</a></span>
+        </div>
+      </p>
+      </div>
+    </div>
+  </div>
+  <hr>
+  
+  <!-- About Card -->
+  <div class="w3-card w3-margin w3-margin-top">
+  <img src="images/log.jpg" style="width:100%">
+    <div class="w3-container w3-white">
+      <h4><b>J&W Site Path</b></h4>
+      <p>2019 - 4st version (Vue.js, jQuery, html, css)<br />hosted on <a href="https://www.github.com/" target="_blank">GitHub</a> and <a href="https://www.zeit.co/" target="_blank">ZEIT</a></p>
+      <p>2014 - 3st version (php, jQuery, bootstrap, html, css)<br />hosted on <a href="https://www.ipage.com/" target="_blank">iPage</a></p>
+      <p>2013 - 2st version (ruby on rails, html, css)</p>
+      <p>2013 - 1st version (html, css)<br />hosted on <a href="https://www.bluehost.com/" target="_blank">bluehost</a></p>
+      <p>2012 - Domain Registered</p>
+    </div>
+  </div>
+  
+<!-- END Introduction Menu -->
+</div>
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+  <a href="https://jfan.ca" :class="['w3-tag w3-round w3-black w3-padding-large w3-margin-bottom', classLocationHostJFan]">« jfan »</a>
+  <a href="https://wzhao.ca" :class="['w3-tag w3-round w3-black w3-padding-large w3-margin-bottom', classLocationHostWZhao]">« wzhao »</a>
+  <p>Copyright &copy; 2012-2020&nbsp;&nbsp;<a href="/">J&W</a>&nbsp;&nbsp;|&nbsp;&nbsp;CSS designed by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
+</div>
+
+<script src="js/jw.js"></script>
+
+</body>
+</html>
