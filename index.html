@@ -54,7 +54,7 @@ and is wrapped around the whole page content, except for the footer in this exam
     <div class="w3-container">
       <div class="w3-row">
         <div class="w3-col m8 s12">
-          <p><button class="w3-button w3-padding-small w3-white w3-border" @click="blog.show = !blog.show"><b>{{blog.show ? '«' : 'Read more »'}}</b></button></p>
+          <p><button class="w3-button w3-padding-small w3-white w3-border" @click="blogReading(blog)"><b>{{blog.show ? '«' : 'Read more »'}}</b></button></p>
         </div>
         <div class="w3-col m4 w3-hide-small">
           <p><span class="w3-padding-small w3-right"><b>By  </b> <span class="w3-tag">{{ blog.author }}</span></span></p>
@@ -109,8 +109,8 @@ and is wrapped around the whole page content, except for the footer in this exam
     <div class="w3-container w3-padding">
       <h4>Reading Posts</h4>
     </div>
-    <ul class="w3-ul w3-hoverable w3-white" v-for="(blog, index) in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
-      <a :href="'#' + blog.publishedAt" v-if="index<5">
+    <ul class="w3-ul w3-hoverable w3-white" v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
+      <a :href="'#' + blog.publishedAt" v-if="reading_blogs.includes(blog.publishedAt)">
         <li class="w3-padding-16">
           <img :src="'https://jw.wj9.ca/images/' + blog.image" alt="Image" class="w3-left w3-margin-right" style="width:50px">
           <span>{{ blog.publishedAt }}</span><br />
