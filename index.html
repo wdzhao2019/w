@@ -40,8 +40,8 @@ and is wrapped around the whole page content, except for the footer in this exam
 <!-- Blog entries -->
 <div class="w3-col l8 s12">
   <!-- Blog entry -->
-  <div v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
-  <div v-if="year_loaded[blog.publishedAt.substring(0,4)]">
+  <div v-for="(blog, index) in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
+  <div v-if="year_loaded[blog.publishedAt.substring(0,4)]" :id="blogIndexID(index)">
   <div class="w3-card-4 w3-margin w3-white" :id="blog.publishedAt">
     <img :src="'https://jw.wj9.ca/images/' + blog.image" alt="Blog Image" style="width:100%">
     <div class="w3-container">
@@ -70,15 +70,44 @@ and is wrapped around the whole page content, except for the footer in this exam
   <hr>      
   </div>
   </div>
-<!-- END BLOG ENTRIES -->
-</div>
 
-<!-- Introduction menu -->
+  <!-- BLOG INDEX BUTTONS -->
+  <div class="w3-card w3-margin w3-white">
+    <div class="w3-container">
+      <p>
+        <span v-for="yearIndex in 7">
+          <button :class="['w3-button w3-padding-small w3-border', classLoadedYear(2020-yearIndex)]" @click="gotoLoadedYear(2020-yearIndex)">
+            {{ (2020-yearIndex).toString() }}
+          </button>&nbsp;
+        </span>
+        <span><button class="w3-button w3-padding-small w3-white w3-border" @click="scrollPageTop()">Top</button></span>
+      </p>
+    </div>
+  </div>
+  <!-- END BLOG INDEX BUTTONS -->
+</div>
+<!-- END BLOG ENTRIES -->
+
+<!-- Right side panel -->
 <div class="w3-col l4">
-  <!-- Recently Posts -->
+  <!-- About Site -->
+  <div class="w3-card w3-margin w3-margin-top">
+  <img src="https://jw.wj9.ca/images/log.jpg" style="width:100%">
+    <div class="w3-container w3-white">
+      <h4><b>J&W Site Path</b></h4>
+      <p>2019 - 4st version (Vue.js, jQuery, html, css)<br />hosted on <a href="https://www.github.com/" target="_blank">GitHub</a> and <a href="https://www.zeit.co/" target="_blank">ZEIT</a></p>
+      <p>2014 - 3st version (php, jQuery, bootstrap, html, css)<br />hosted on <a href="https://www.ipage.com/" target="_blank">iPage</a></p>
+      <p>2013 - 2st version (ruby on rails, html, css)</p>
+      <p>2013 - 1st version (html, css)<br />hosted on <a href="https://www.bluehost.com/" target="_blank">bluehost</a></p>
+      <p>2012 - Domain Registered</p>
+    </div>
+  </div>
+  <hr> 
+ 
+  <!-- Reading Posts -->
   <div class="w3-card w3-margin">
     <div class="w3-container w3-padding">
-      <h4>Recently Posts</h4>
+      <h4>Reading Posts</h4>
     </div>
     <ul class="w3-ul w3-hoverable w3-white" v-for="(blog, index) in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
       <a :href="'#' + blog.publishedAt" v-if="index<5">
@@ -90,8 +119,8 @@ and is wrapped around the whole page content, except for the footer in this exam
       </a>
     </ul>
   </div>
-  <hr> 
- 
+  <hr>
+  
   <!-- Archives -->
   <div class="w3-card w3-margin">
     <div class="w3-container w3-padding">
@@ -112,29 +141,15 @@ and is wrapped around the whole page content, except for the footer in this exam
       </div>
     </div>
   </div>
-  <hr>
   
-  <!-- About Card -->
-  <div class="w3-card w3-margin w3-margin-top">
-  <img src="https://jw.wj9.ca/images/log.jpg" style="width:100%">
-    <div class="w3-container w3-white">
-      <h4><b>J&W Site Path</b></h4>
-      <p>2019 - 4st version (Vue.js, jQuery, html, css)<br />hosted on <a href="https://www.github.com/" target="_blank">GitHub</a> and <a href="https://www.zeit.co/" target="_blank">ZEIT</a></p>
-      <p>2014 - 3st version (php, jQuery, bootstrap, html, css)<br />hosted on <a href="https://www.ipage.com/" target="_blank">iPage</a></p>
-      <p>2013 - 2st version (ruby on rails, html, css)</p>
-      <p>2013 - 1st version (html, css)<br />hosted on <a href="https://www.bluehost.com/" target="_blank">bluehost</a></p>
-      <p>2012 - Domain Registered</p>
-    </div>
-  </div>
-  
-<!-- END Introduction Menu -->
 </div>
+<!-- END Right side panel -->
 
+</div><br />
 <!-- END GRID -->
-</div><br>
 
-<!-- END w3-content -->
 </div>
+<!-- END w3-content -->
 
 <!-- Footer -->
 <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
