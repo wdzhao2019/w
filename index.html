@@ -100,9 +100,10 @@ and is wrapped around the whole page content, except for the footer in this exam
       <p>
         <span><button class="w3-button w3-padding-small w3-white w3-border" @click="scrollPageTop()">&nbsp;«&nbsp;</button></span>
         <span v-for="yearIndex in 7">
+          &nbsp;
           <button :class="['w3-button w3-padding-small w3-border', classLoadedYear(2020-yearIndex)]" @click="gotoLoadedYear(2020-yearIndex)">
             {{ (2020-yearIndex).toString() }}
-          </button>&nbsp;
+          </button>
         </span>
       </p>
     </div>
