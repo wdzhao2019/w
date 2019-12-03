@@ -120,7 +120,7 @@ and is wrapped around the whole page content, except for the footer in this exam
     <ul class="w3-ul w3-hoverable w3-white" v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
       <a :href="'#' + blog.publishedAt" v-if="reading_blogs.includes(blog.publishedAt)">
         <li class="w3-padding-16">
-          <img :src="'https://jw.wj9.ca/images/' + blog.image" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <img :src="'https://jw.wj9.ca/images/' + blog.image.replace('png', 'jpg')" alt="Image" class="w3-left w3-margin-right" style="width:50px">
           <span>{{ blog.publishedAt }}</span><br />
           <span class="w3-large">{{ blog.title }}</span><br>
         </li>
