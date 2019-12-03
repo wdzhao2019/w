@@ -43,7 +43,7 @@ and is wrapped around the whole page content, except for the footer in this exam
   <div v-for="(blog, index) in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
   <div v-if="year_loaded[blog.publishedAt.substring(0,4)]" :id="blogIndexID(index)">
   <div class="w3-card-4 w3-margin w3-white" :id="blog.publishedAt">
-    <img :src="'https://jw.wj9.ca/images/' + blog.image" alt="Blog Image" style="width:100%">
+    <img :src="'https://jw.wj9.ca/images/' + blog.image.replace('png', 'jpg')" alt="Blog Image" style="width:100%">
     <div class="w3-container">
       <p>&nbsp;</p>
       <h3><b>{{ blog.title }}</b></h3>
