@@ -63,7 +63,8 @@ and is wrapped around the whole page content, except for the footer in this exam
       <div v-if="blog.show">
         <p>&nbsp;</p>
         <p v-html="blog.body.join('<br />')"> {{ blog.body.join('<br />') }} </p>
-        <span v-if="blog.hasOwnProperty('video')">
+        <span class="w3-light-grey w3-medium" v-if="blog.hasOwnProperty('video')">
+          <i><b>VIDEO:&nbsp;</b>&nbsp;<span class="jw">&nbsp;</span>&nbsp;<span class="jw">&nbsp;</span>&nbsp;<span class="jw">&nbsp;</span></i>
           <p v-for="(description, video) in blog.video">
             <br />
             <iframe width="340" height="700" :src="video.replace('TikTok', 'https://www.tiktok.com/embed/')" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
