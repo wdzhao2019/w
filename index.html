@@ -39,6 +39,21 @@ and is wrapped around the whole page content, except for the footer in this exam
 
 <!-- Blog entries -->
 <div class="w3-col l8 s12">
+  <!-- BLOG INDEX BUTTONS -->
+  <div class="w3-card w3-margin w3-white">
+    <div class="w3-container">
+      <p>
+        <span v-for="yearIndex in 7">
+          <button :class="['w3-button w3-padding-small w3-border', classLoadedYear(2020-yearIndex)]" @click="gotoLoadedYear(2020-yearIndex)">
+            {{ (2020-yearIndex).toString() }}
+          </button>&nbsp;
+        </span>
+        <span><button class="w3-button w3-padding-small w3-white w3-border" @click="scrollPageBottom()">&nbsp;»&nbsp;</button></span>
+      </p>
+    </div>
+  </div>
+  <!-- END BLOG INDEX BUTTONS -->
+
   <!-- Blog entry -->
   <div v-for="(blog, index) in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
   <div v-if="year_loaded[blog.publishedAt.substring(0,4)]" :id="blogIndexID(index)">
@@ -83,12 +98,12 @@ and is wrapped around the whole page content, except for the footer in this exam
   <div class="w3-card w3-margin w3-white">
     <div class="w3-container">
       <p>
+        <span><button class="w3-button w3-padding-small w3-white w3-border" @click="scrollPageTop()">&nbsp;«&nbsp;</button></span>
         <span v-for="yearIndex in 7">
           <button :class="['w3-button w3-padding-small w3-border', classLoadedYear(2020-yearIndex)]" @click="gotoLoadedYear(2020-yearIndex)">
             {{ (2020-yearIndex).toString() }}
           </button>&nbsp;
         </span>
-        <span><button class="w3-button w3-padding-small w3-white w3-border" @click="scrollPageTop()">Top</button></span>
       </p>
     </div>
   </div>
