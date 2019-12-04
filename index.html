@@ -64,7 +64,7 @@ and is wrapped around the whole page content, except for the footer in this exam
       <h3 v-if="reading_blogs.includes(blog.publishedAt)"><b>{{ blog.title }}</b></h3>
       <h3 v-else><button class="w3-button w3-padding-small w3-white w3-border" @click="blogReading(blog)"><b>{{ blog.title }}</b></button></h3>
       <h5><span class="w3-opacity">{{ blog.publishedAt }}</span></h5>
-      <h4><span class="w3-greyscale" v-html="blog.description">{{ blog.description }}</span></h4>
+      <h4 v-if="reading_blogs.includes(blog.publishedAt)"><span class="w3-greyscale" v-html="blog.description">{{ blog.description }}</span></h4>
       <p>&nbsp;</p>
     </div>
     <div class="w3-container" v-if="reading_blogs.includes(blog.publishedAt)">
