@@ -155,8 +155,7 @@ var jw = new Vue({
       return '';
     },
     blogReading: function (blog) {
-      blog.show = !blog.show;
-      if (blog.show && !this.reading_blogs.includes(blog.publishedAt)) this.reading_blogs.push(blog.publishedAt);
+      if (!this.reading_blogs.includes(blog.publishedAt)) this.reading_blogs.push(blog.publishedAt);
     },
     scrollPageTop: function () {
       $('html, body').animate({scrollTop: 0}, 'fast');
