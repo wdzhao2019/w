@@ -58,15 +58,16 @@ and is wrapped around the whole page content, except for the footer in this exam
   <div v-for="(blog, index) in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
   <div v-if="year_loaded[blog.publishedAt.substring(0,4)]" :id="blogIndexID(index)">
   <div class="w3-card-4 w3-margin w3-white" :id="blog.publishedAt">
-    <img :src="'https://wj.wj9.ca/images/' + blog.image + '.jpg'" alt="Blog Image" style="width:100%">
+    <img :src="'https://wj.wj9.ca/images/' + blog.image + '.jpg'" alt="Blog Image" style="width:100%" v-if="reading_blogs.includes(blog.publishedAt)">
     <div class="w3-container">
       <p>&nbsp;</p>
-      <h3><b>{{ blog.title }}</b></h3>
+      <h3 v-if="reading_blogs.includes(blog.publishedAt)"><b>{{ blog.title }}</b></h3>
+      <h3 v-else><button class="w3-button w3-padding-small w3-white w3-border" @click="blogReading(blog)"><b>{{ blog.title }}</b></button></h3>
       <h5><span class="w3-opacity">{{ blog.publishedAt }}</span></h5>
       <h4><span class="w3-greyscale" v-html="blog.description">{{ blog.description }}</span></h4>
       <p>&nbsp;</p>
     </div>
-    <div class="w3-container">
+    <div class="w3-container" v-if="reading_blogs.includes(blog.publishedAt)">
       <div class="w3-row">
         <div class="w3-col m8 s12">
           <p><button class="w3-button w3-padding-small w3-white w3-border" @click="blogReading(blog)"><b>{{blog.show ? '«' : 'Read more »'}}</b></button></p>
