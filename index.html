@@ -9,11 +9,11 @@
 <meta name="p:domain_verify" content="fe3af0cec02c8bf6de660e72b794c9c5" />
 <link href="favicon.ico" rel="icon" type="image/ico" /> 
 <link href="favicon.ico" rel="shortcut icon" />
-<link href="https://jw.wj9.ca/css/jw.css" rel="stylesheet" />
+<link href="/css/jw.css" rel="stylesheet" />
 <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css" />
 <link href="http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-<script src="https://jw.wj9.ca/js/jquery-3.4.1.min.js"></script>
-<script src="https://jw.wj9.ca/js/vue.js"></script>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/vue.js"></script>
 <style>
 body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 </style>
@@ -29,7 +29,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 <!-- Header -->
 <header class="w3-container w3-center w3-padding-32 w3-header-bg">
   <h6><b>&nbsp;</b></h6>
-  <a href="/"><img src="https://jw.wj9.ca/images/logo.png" alt="J & W" /></a>
+  <a href="/"><img src="/images/logo.png" alt="J & W" /></a>
   <h1><b>&nbsp;</b></h1>
   <p><span class="w3-tag"><a href="https://jfan.ca">jfan.ca</a></span>&nbsp;|&nbsp;<span class="w3-tag"><a href="https://wzhao.ca">wzhao.ca</a></span></p>
 </header>
@@ -58,7 +58,7 @@ and is wrapped around the whole page content, except for the footer in this exam
   <div v-for="(blog, index) in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
   <div v-if="year_loaded[blog.publishedAt.substring(0,4)]" :id="blogIndexID(index)">
   <div class="w3-card-4 w3-margin w3-white" :id="blog.publishedAt">
-    <img :src="'https://jw.wj9.ca/images/' + blog.image.replace('png', 'jpg')" alt="Blog Image" style="width:100%">
+    <img :src="'https://jw.wj9.ca/images/' + blog.image + '.jpg'" alt="Blog Image" style="width:100%">
     <div class="w3-container">
       <p>&nbsp;</p>
       <h3><b>{{ blog.title }}</b></h3>
@@ -116,7 +116,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 <div class="w3-col l4">
   <!-- About Site -->
   <div class="w3-card w3-margin w3-margin-top">
-  <img src="https://jw.wj9.ca/images/log.jpg" style="width:100%">
+  <img src="/images/log.jpg" style="width:100%">
     <div class="w3-container w3-white">
       <h4><b>J&W Site Path</b></h4>
       <p>2019 - 4st version (Vue.js, jQuery, html, css)<br />hosted on <a href="https://www.github.com/" target="_blank">GitHub</a> and <a href="https://www.zeit.co/" target="_blank">ZEIT</a></p>
@@ -136,7 +136,7 @@ and is wrapped around the whole page content, except for the footer in this exam
     <ul class="w3-ul w3-hoverable w3-white" v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
       <a :href="'#' + blog.publishedAt" v-if="reading_blogs.includes(blog.publishedAt)">
         <li class="w3-padding-16">
-          <img :src="'https://jw.wj9.ca/images/' + blog.image.replace('png', 'jpg')" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+          <img :src="'https://jw.wj9.ca/images/' + blog.image + '.jpg'" alt="Image" class="w3-left w3-margin-right" style="width:50px">
           <span>{{ blog.publishedAt }}</span><br />
           <span class="w3-large">{{ blog.title }}</span><br>
         </li>
@@ -184,7 +184,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 
 </div>
 
-<script src="https://jw.wj9.ca/js/jw.js"></script>
+<script src="/js/jw.js"></script>
 
 </body>
 </html>
