@@ -155,8 +155,8 @@ var jw = new Vue({
       return '';
     },
     blogBody: function (blog) {
-	  var blog_body = "";
-	  blog.body.forEach( function(line) {
+      var blog_body = "";
+      blog.body.forEach( function(line) {
         blog_body += line.replace("<jw-img", "<img style='width:100%'").replace("data-pi='", "src='https://i.pinimg.com/originals/") + "<br />";
       });
       return blog_body;
