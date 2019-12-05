@@ -154,6 +154,13 @@ var jw = new Vue({
       if ((index == 0) || (index < this.blogs.length && this.blogs[index].publishedAt.substring(0, 4) != this.blogs[index - 1].publishedAt.substring(0, 4))) return this.blogs[index].publishedAt.substring(0, 4);
       return '';
     },
+    blogBody: function (blog) {
+	  var blog_body = "";
+	  blog.body.forEach( function(line) {
+        blog_body += line.replace("<jw-img", "<img style='width:100%'").replace("data-pi='", "src='https://i.pinimg.com/originals/") + "<br />";
+      });
+      return blog_body;
+    },
     blogReading: function (blog) {
       if (!this.reading_blogs.includes(blog.publishedAt)) this.reading_blogs.push(blog.publishedAt);
     },

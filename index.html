@@ -78,7 +78,7 @@ and is wrapped around the whole page content, except for the footer in this exam
       </div>
       <div v-if="blog.show">
         <p>&nbsp;</p>
-        <p v-html="blog.body.join('<br />')"> {{ blog.body.join('<br />') }} </p>
+        <p v-html="blogBody(blog)"> {{ blogBody(blog) }} </p>
         <span class="w3-light-grey w3-medium" v-if="blog.hasOwnProperty('video')">
           <i><b>VIDEO:&nbsp;</b>&nbsp;<span class="jw">&nbsp;</span>&nbsp;<span class="jw">&nbsp;</span>&nbsp;<span class="jw">&nbsp;</span></i>
           <p v-for="(description, video) in blog.video">
