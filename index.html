@@ -83,7 +83,12 @@ and is wrapped around the whole page content, except for the footer in this exam
           <i><b>VIDEO:&nbsp;</b>&nbsp;<span class="jw">&nbsp;</span>&nbsp;<span class="jw">&nbsp;</span>&nbsp;<span class="jw">&nbsp;</span></i>
           <p v-for="(description, video) in blog.video">
             <br />
-            <iframe width="340" height="700" :src="video.replace('TikTok', 'https://www.tiktok.com/embed/')" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div v-if="video.startsWith('TikTok')">
+              <iframe width="340" height="700" :src="video.replace('TikTok', 'https://www.tiktok.com/embed/')" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div v-if="video.startsWith('Vimeo')">
+              <iframe width="640" height="564" :src="video.replace('Vimeo', 'https://player.vimeo.com/video/')" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
             <br />
             <span v-html="description">{{ description }}</span>
           </p>
