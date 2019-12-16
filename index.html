@@ -84,7 +84,7 @@ and is wrapped around the whole page content, except for the footer in this exam
           <p v-for="(description, video) in blog.video">
             <br />
             <iframe v-if="video.startsWith('TikTok')" width="340" height="700" :src="video.replace('TikTok', 'https://www.tiktok.com/embed/')" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <iframe v-if="video.startsWith('Vimeo')" width="640" height="564" :src="video.replace('Vimeo', 'https://player.vimeo.com/video/')" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <iframe v-if="video.startsWith('Vimeo')" width="640" height="360" :src="video.replace('Vimeo', 'https://player.vimeo.com/video/')" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
             <br />
             <span v-html="description">{{ description }}</span>
           </p>
