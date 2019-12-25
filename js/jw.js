@@ -3,6 +3,7 @@ var jw = new Vue({
   data: {
     blogs: [],
     year_loaded: {},
+    view_blog: null,
     reading_blogs: [
       '2019-10-27',
       '2019-09-10'
@@ -16,9 +17,10 @@ var jw = new Vue({
   methods: {
     loadJsonFiles: function (year) {
       if (!this.year_loaded[year.toString()]) {
-        $.getJSON('https://wj.wj9.ca/json/' + year.toString() + '.json', function (data) {
-          data.forEach( function (blog) {    
+        $.getJSON('https://jw.wj9.ca/json/' + year.toString() + '.json', function(data) {
+          data.forEach( function(blog) {    
             jw.blogs.push(blog);
+            if (window.location.search.substring(1, 9) == blog.publishedAt.split('-').join('')) jw.view_blog = blog;
           });
         });
         this.year_loaded[year.toString()] = true;
@@ -38,8 +40,7 @@ var jw = new Vue({
     blogBody: function (blog) {
       var blog_body = "";
       blog.body.forEach( function(line) {
-        blog_body += line.replace("<jw-img", "<img style='width:100%'").replace("data-pa-", "src='https://cdn").replace("='jw/", ".picsart.com/") + "<br />";
-        //blog_body += line.replace("<jw-img", "<img style='width:100%'").replace("data-pi='", "src='https://i.pinimg.com/originals/") + "<br />";
+        blog_body += line.replace("<jw-img", "<img style='width:100%'").replace("data-pi='", "src='https://i.pinimg.com/originals/") + "<br />";
       });
       return blog_body;
     },

@@ -1,193 +1,223 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>J & W</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="keywords" content="JXFAN, WDZHAO, J&W, W&J" />
-<meta name="description" content="jfan.ca,jxfan.ca,wzhao.ca,wdzhao.ca" />
-<meta name="p:domain_verify" content="fe3af0cec02c8bf6de660e72b794c9c5" />
-<link href="favicon.ico" rel="icon" type="image/ico" /> 
-<link href="favicon.ico" rel="shortcut icon" />
-<link href="/css/jw.css" rel="stylesheet" />
-<link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css" />
-<link href="http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-<script src="/js/jquery-3.4.1.min.js"></script>
-<script src="/js/vue.js"></script>
-<script src="/js/vue-router.js"></script>
-<style>
-body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-</style>
+  <title>J & W</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="keywords" content="JXFAN, WDZHAO, J&W, W&J" />
+  <meta name="description" content="jfan.ca,jxfan.ca,wzhao.ca,wdzhao.ca" />
+  <meta name="p:domain_verify" content="fe3af0cec02c8bf6de660e72b794c9c5" />
+  <link href="favicon.ico" rel="icon" type="image/ico" /> 
+  <link href="favicon.ico" rel="shortcut icon" />
+  <link href="/css/jw.css" rel="stylesheet" />
+  <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900" rel="stylesheet" type="text/css" />
+  <link href="http://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+  <script src="/js/jquery-3.4.1.min.js"></script>
+  <script src="/js/vue.js"></script>
+  <style>
+    body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+  </style>
 </head>
 <body class="w3-light-grey">
+  <div id="jw">
+    <!-- w3-content defines a container for fixed size centered content, 
+    and is wrapped around the whole page content, except for the footer in this example -->
+    <div class="w3-content" style="max-width:1400px">
+      <!-- Header -->
+      <header class="jw-header-bg w3-container w3-center w3-padding-32">
+        <h6><b>&nbsp;</b></h6>
+        <a href="/"><img src="/images/logo.png" alt="J & W" /></a>
+        <h1><b>&nbsp;</b></h1>
+        <p><span class="w3-tag"><a href="https://jfan.ca">jfan.ca</a></span>&nbsp;|&nbsp;<span class="w3-tag"><a href="https://wzhao.ca">wzhao.ca</a></span></p>
+      </header>
 
-<div id="jw">
-
-<!-- w3-content defines a container for fixed size centered content, 
-and is wrapped around the whole page content, except for the footer in this example -->
-<div class="w3-content" style="max-width:1400px">
-
-<!-- Header -->
-<header class="w3-container w3-center w3-padding-32 w3-header-bg">
-  <h6><b>&nbsp;</b></h6>
-  <a href="/"><img src="/images/logo.png" alt="J & W" /></a>
-  <h1><b>&nbsp;</b></h1>
-  <p><span class="w3-tag"><a href="https://jfan.ca">jfan.ca</a></span>&nbsp;|&nbsp;<span class="w3-tag"><a href="https://wzhao.ca">wzhao.ca</a></span></p>
-</header>
-
-<!-- Grid -->
-<div class="w3-row">
-
-<!-- Blog entries -->
-<div class="w3-col l8 s12">
-  <!-- BLOG INDEX BUTTONS -->
-  <div class="w3-card w3-margin w3-white">
-    <div class="w3-container">
-      <p>
-        <span v-for="yearIndex in 7">
-          <button :class="['w3-button w3-padding-small w3-border', classLoadedYear(2020-yearIndex)]" @click="gotoLoadedYear(2020-yearIndex)">
-            {{ (2020-yearIndex).toString() }}
-          </button>&nbsp;
-        </span>
-        <span><button class="w3-button w3-padding-small w3-white w3-border" @click="scrollPageBottom()">&nbsp;»&nbsp;</button></span>
-      </p>
-    </div>
-  </div>
-  <!-- END BLOG INDEX BUTTONS -->
-
-  <!-- Blog entry -->
-  <div v-for="(blog, index) in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
-  <div v-if="year_loaded[blog.publishedAt.substring(0,4)]" :id="blogIndexID(index)">
-  <div class="w3-card-4 w3-margin w3-white" :id="blog.publishedAt">
-    <img :src="'https://wj.wj9.ca/images/' + blog.image + '.jpg'" alt="Blog Image" style="width:100%" v-if="reading_blogs.includes(blog.publishedAt)">
-    <div class="w3-container">
-      <p>&nbsp;</p>
-      <h3 v-if="reading_blogs.includes(blog.publishedAt)"><b>{{ blog.title }}</b></h3>
-      <h3 v-else><button class="w3-button w3-padding-small w3-white w3-border" @click="blogReading(blog)"><b>{{ blog.title }}</b></button></h3>
-      <h5><span class="w3-opacity">{{ blog.publishedAt }}</span></h5>
-      <h4 v-if="reading_blogs.includes(blog.publishedAt)"><span class="w3-greyscale" v-html="blog.description">{{ blog.description }}</span></h4>
-      <p>&nbsp;</p>
-    </div>
-    <div class="w3-container" v-if="reading_blogs.includes(blog.publishedAt)">
+      <!-- Grid -->
       <div class="w3-row">
-        <div class="w3-col m8 s12">
-          <p><button class="w3-button w3-padding-small w3-light-grey w3-border" @click="blog.show = !blog.show"><b>{{blog.show ? '«' : 'Read more »'}}</b></button></p>
+        <!-- BLOG VIEW -->
+        <div  v-if="view_blog != null" class="w3-col l8 s12">
+          <div class="w3-card-4 w3-margin w3-white" :id="view_blog.publishedAt">
+            <img :src="'https://jw.wj9.ca/images/' + view_blog.image + '.jpg'" alt="Blog Image" style="width:100%">
+            <div class="w3-container">
+              <p>&nbsp;</p>
+              <h3><b>{{ view_blog.title }}</b></h3>
+              <h5><span class="w3-opacity">{{ view_blog.publishedAt }}</span></h5>
+              <p>&nbsp;</p>
+            </div>
+            <div class="w3-container">
+              <div class="w3-row">
+                <div class="w3-col m8 s12">
+                  <p><button class="w3-button w3-padding-small w3-light-grey w3-border" @click="view_blog=null"><b>« Home</b></button></p>
+                </div>
+                <div class="w3-col m4 w3-hide-small">
+                  <p><span class="w3-padding-small w3-right"><b>By  </b> <span class="w3-tag">{{ view_blog.author }}</span></span></p>
+                </div>
+              </div>
+              <div>
+                <p>&nbsp;</p>
+                <p v-html="blogBody(view_blog)"> {{ blogBody(view_blog) }} </p>
+                <span class="w3-light-grey w3-medium" v-if="view_blog.hasOwnProperty('video')">
+                  <i><b>VIDEO:&nbsp;</b>&nbsp;<span class="jw">&nbsp;</span>&nbsp;<span class="jw">&nbsp;</span>&nbsp;<span class="jw">&nbsp;</span></i>
+                  <p v-for="(description, video) in view_blog.video">
+                    <br />
+                    <iframe v-if="video.startsWith('TikTok')" width="340" height="700" :src="video.replace('TikTok', 'https://www.tiktok.com/embed/')" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe v-if="video.startsWith('Vimeo')" width="640" height="360" :src="video.replace('Vimeo', 'https://player.vimeo.com/video/')" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                    <br />
+                    <span v-html="description">{{ description }}</span>
+                  </p>
+                </span>
+              </div>
+            </div>
+          </div>
+          <hr>      
         </div>
-        <div class="w3-col m4 w3-hide-small">
-          <p><span class="w3-padding-small w3-right"><b>By  </b> <span class="w3-tag">{{ blog.author }}</span></span></p>
+        <!-- END BLOG VIEW -->
+
+        <!-- Blog entries -->
+        <div v-if="view_blog == null" class="w3-col l8 s12">
+          <!-- BLOG INDEX BUTTONS -->
+          <div class="w3-card w3-margin w3-white">
+            <div class="w3-container">
+              <p>
+                <span v-for="yearIndex in 7">
+                  <button :class="['w3-button w3-padding-small w3-border', classLoadedYear(2020-yearIndex)]" @click="gotoLoadedYear(2020-yearIndex)">
+                    {{ (2020-yearIndex).toString() }}
+                  </button>&nbsp;
+                </span>
+                <span><button class="w3-button w3-padding-small w3-white w3-border" @click="scrollPageBottom()">&nbsp;»&nbsp;</button></span>
+              </p>
+            </div>
+          </div>
+          <!-- END BLOG INDEX BUTTONS -->
+
+          <!-- Blog entry -->
+          <div v-for="(blog, index) in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
+            <div v-if="year_loaded[blog.publishedAt.substring(0,4)]" :id="blogIndexID(index)">
+              <div class="w3-card-4 w3-margin w3-white" :id="blog.publishedAt">
+                <img :src="'https://jw.wj9.ca/images/' + blog.image + '.jpg'" alt="Blog Image" style="width:100%" v-if="reading_blogs.includes(blog.publishedAt)">
+                <div class="w3-container">
+                  <p>&nbsp;</p>
+                  <h3 v-if="reading_blogs.includes(blog.publishedAt)"><b>{{ blog.title }}</b></h3>
+                  <h3 v-else><button class="w3-button w3-padding-small w3-white w3-border" @click="blogReading(blog)"><b>{{ blog.title }}</b></button></h3>
+                  <h5><span class="w3-opacity">{{ blog.publishedAt }}</span></h5>
+                  <h4 v-if="reading_blogs.includes(blog.publishedAt)"><span class="w3-greyscale" v-html="blog.description">{{ blog.description }}</span></h4>
+                  <p>&nbsp;</p>
+                </div>
+                <div class="w3-container" v-if="reading_blogs.includes(blog.publishedAt)">
+                  <div class="w3-row">
+                    <div class="w3-col m8 s12">
+                      <p><button class="w3-button w3-padding-small w3-light-grey w3-border" @click="view_blog = blog"><b>{{blog.show ? '«' : 'Read more »'}}</b></button></p>
+                    </div>
+                    <div class="w3-col m4 w3-hide-small">
+                      <p><span class="w3-padding-small w3-right"><b>By  </b> <span class="w3-tag">{{ blog.author }}</span></span></p>
+                    </div>
+                  </div>
+                  <div v-if="blog.show">
+                    <p>&nbsp;</p>
+                    <p v-html="blogBody(blog)"> {{ blogBody(blog) }} </p>
+                    <span class="w3-light-grey w3-medium" v-if="blog.hasOwnProperty('video')">
+                      <i><b>VIDEO:&nbsp;</b>&nbsp;<span class="jw">&nbsp;</span>&nbsp;<span class="jw">&nbsp;</span>&nbsp;<span class="jw">&nbsp;</span></i>
+                      <p v-for="(description, video) in blog.video">
+                        <br />
+                        <iframe v-if="video.startsWith('TikTok')" width="340" height="700" :src="video.replace('TikTok', 'https://www.tiktok.com/embed/')" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <iframe v-if="video.startsWith('Vimeo')" width="640" height="360" :src="video.replace('Vimeo', 'https://player.vimeo.com/video/')" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                        <br />
+                        <span v-html="description">{{ description }}</span>
+                      </p>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <hr>      
+            </div>
+          </div>
+
+          <!-- BLOG INDEX BUTTONS -->
+          <div class="w3-card w3-margin w3-white">
+            <div class="w3-container">
+              <p>
+                <span><button class="w3-button w3-padding-small w3-white w3-border" @click="scrollPageTop()">&nbsp;«&nbsp;</button></span>
+                <span v-for="yearIndex in 7">
+                  &nbsp;
+                  <button :class="['w3-button w3-padding-small w3-border', classLoadedYear(2020-yearIndex)]" @click="gotoLoadedYear(2020-yearIndex)">
+                    {{ (2020-yearIndex).toString() }}
+                  </button>
+                </span>
+              </p>
+            </div>
+          </div>
+          <!-- END BLOG INDEX BUTTONS -->
         </div>
-      </div>
-      <div v-if="blog.show">
-        <p>&nbsp;</p>
-        <p v-html="blogBody(blog)"> {{ blogBody(blog) }} </p>
-        <span class="w3-light-grey w3-medium" v-if="blog.hasOwnProperty('video')">
-          <i><b>VIDEO:&nbsp;</b>&nbsp;<span class="jw">&nbsp;</span>&nbsp;<span class="jw">&nbsp;</span>&nbsp;<span class="jw">&nbsp;</span></i>
-          <p v-for="(description, video) in blog.video">
-            <br />
-            <iframe v-if="video.startsWith('TikTok')" width="340" height="700" :src="video.replace('TikTok', 'https://www.tiktok.com/embed/')" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <iframe v-if="video.startsWith('Vimeo')" width="640" height="360" :src="video.replace('Vimeo', 'https://player.vimeo.com/video/')" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-            <br />
-            <span v-html="description">{{ description }}</span>
-          </p>
-        </span>
-      </div>
-    </div>
-  </div>
-  <hr>      
-  </div>
-  </div>
+        <!-- END BLOG ENTRIES -->
 
-  <!-- BLOG INDEX BUTTONS -->
-  <div class="w3-card w3-margin w3-white">
-    <div class="w3-container">
-      <p>
-        <span><button class="w3-button w3-padding-small w3-white w3-border" @click="scrollPageTop()">&nbsp;«&nbsp;</button></span>
-        <span v-for="yearIndex in 7">
-          &nbsp;
-          <button :class="['w3-button w3-padding-small w3-border', classLoadedYear(2020-yearIndex)]" @click="gotoLoadedYear(2020-yearIndex)">
-            {{ (2020-yearIndex).toString() }}
-          </button>
-        </span>
-      </p>
-    </div>
-  </div>
-  <!-- END BLOG INDEX BUTTONS -->
-</div>
-<!-- END BLOG ENTRIES -->
-
-<!-- Right side panel -->
-<div class="w3-col l4">
-  <!-- About Site -->
-  <div class="w3-card w3-margin w3-margin-top">
-  <img src="/images/log.jpg" style="width:100%">
-    <div class="w3-container w3-white">
-      <h4><b>J&W Site Path</b></h4>
-      <p>2019 - 4st version (Vue.js, jQuery, html, css)<br />hosted on <a href="https://www.github.com/" target="_blank">GitHub</a> and <a href="https://www.zeit.co/" target="_blank">ZEIT</a></p>
-      <p>2014 - 3st version (php, jQuery, bootstrap, html, css)<br />hosted on <a href="https://www.ipage.com/" target="_blank">iPage</a></p>
-      <p>2013 - 2st version (ruby on rails, html, css)</p>
-      <p>2013 - 1st version (html, css)<br />hosted on <a href="https://www.bluehost.com/" target="_blank">bluehost</a></p>
-      <p>2012 - Domain Registered</p>
-    </div>
-  </div>
-  <hr> 
- 
-  <!-- Reading Posts -->
-  <div class="w3-card w3-margin">
-    <div class="w3-container w3-padding">
-      <h4>Reading Posts</h4>
-    </div>
-    <ul class="w3-ul w3-hoverable w3-white" v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
-      <a :href="'#' + blog.publishedAt" v-if="reading_blogs.includes(blog.publishedAt)">
-        <li class="w3-padding-16">
-          <img :src="'https://wj.wj9.ca/images/' + blog.image + '.jpg'" alt="Image" class="w3-left w3-margin-right" style="width:50px">
-          <span>{{ blog.publishedAt }}</span><br />
-          <span class="w3-large">{{ blog.title }}</span><br>
-        </li>
-      </a>
-    </ul>
-  </div>
-  <hr>
-  
-  <!-- Archives -->
-  <div class="w3-card w3-margin">
-    <div class="w3-container w3-padding">
-      <h4>Archives</h4>
-    </div>
-    <div class="w3-container w3-white">
-      <div v-for="yearIndex in 7">
-      <span class="w3-tag w3-white w3-large w3-margin-top"><span class="jw">&nbsp;</span>
-      <button class="w3-button w3-padding-small w3-white w3-border" @click="loadJsonFiles(2020-yearIndex)">
-      {{ (2020-yearIndex).toString() + ' ' + (year_loaded[(2020-yearIndex).toString()] ? '«' : '»') }}
-      </button>
-      </span> 
-      <p class="w3-light-grey">
-        <div v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
-        <span class="w3-light-grey w3-medium jw-jw" v-if="blog.publishedAt.startsWith((2020-yearIndex).toString())"><span class="jw-wj">&nbsp;</span><a :href="'#' + blog.publishedAt">{{ blog.publishedAt + ' ' + blog.title }}</a></span>
+        <!-- Right side panel -->
+        <div class="w3-col l4">
+          <!-- About Site -->
+          <div class="w3-card w3-margin w3-margin-top">
+            <img src="/images/log.jpg" style="width:100%" />
+            <div class="w3-container w3-white">
+              <h4><b>J&W Site Path</b></h4>
+              <p>2019 - 4st version (Vue.js, jQuery, html, css)<br />hosted on <a href="https://www.github.com/" target="_blank">GitHub</a> and <a href="https://www.zeit.co/" target="_blank">ZEIT</a></p>
+              <p>2014 - 3st version (php, jQuery, bootstrap, html, css)<br />hosted on <a href="https://www.ipage.com/" target="_blank">iPage</a></p>
+              <p>2013 - 2st version (ruby on rails, html, css)</p>
+              <p>2013 - 1st version (html, css)<br />hosted on <a href="https://www.bluehost.com/" target="_blank">bluehost</a></p>
+              <p>2012 - Domain Registered</p>
+            </div>
+          </div>
+          <hr /> 
+         
+          <!-- Reading Posts -->
+          <div class="w3-card w3-margin">
+            <div class="w3-container w3-padding">
+              <h4>Reading Posts</h4>
+            </div>
+            <ul class="w3-ul w3-hoverable w3-white" v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
+              <li class="w3-padding-16"  v-if="reading_blogs.includes(blog.publishedAt)">
+                <img :src="'https://jw.wj9.ca/images/' + blog.image + '.jpg'" alt="Image" class="w3-left w3-margin-right" style="width:50px" />
+                <span>{{ blog.publishedAt }}</span><br />
+                <button class="w3-tag w3-light-grey w3-padding-large w3-border" @click="view_blog=blog">{{ blog.title }}</button><br />
+              </li>
+            </ul>
+          </div>
+          <hr />
+          
+          <!-- Archives -->
+          <div class="w3-card w3-margin">
+            <div class="w3-container w3-padding">
+              <h4>Archives</h4>
+            </div>
+            <div class="w3-container w3-white">
+              <div v-for="yearIndex in 7">
+                <span class="w3-tag w3-white w3-large w3-margin-top"><span class="jw">&nbsp;</span>
+                <button class="w3-button w3-padding-small w3-white w3-border" @click="loadJsonFiles(2020-yearIndex)">
+                  {{ (2020-yearIndex).toString() + ' ' + (year_loaded[(2020-yearIndex).toString()] ? '«' : '»') }}
+                </button>
+                </span> 
+                <p class="w3-light-grey">
+                  <div v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
+                    <span class="w3-light-grey w3-medium jw-jw" v-if="blog.publishedAt.startsWith((2020-yearIndex).toString())">
+                      <span class="jw-wj">&nbsp;</span>
+                      <button class="w3-tag w3-light-grey w3-border" @click="view_blog=blog">{{ blog.publishedAt + blog.title }}</button><br />
+                    </span>
+                  </div>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-      </p>
+        <!-- END Right side panel -->
       </div>
+      <br />
+      <!-- END GRID -->
     </div>
+    <!-- END w3-content -->
+
+    <!-- Footer -->
+    <footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+      <a href="https://jfan.ca" :class="['w3-tag w3-round w3-black w3-padding-large w3-margin-bottom', classLocationHostJFan]">« jfan »</a>
+      <a href="https://wzhao.ca" :class="['w3-tag w3-round w3-black w3-padding-large w3-margin-bottom', classLocationHostWZhao]">« wzhao »</a>
+      <p>Copyright &copy; 2012-2020&nbsp;&nbsp;<a href="/">J&W</a>&nbsp;&nbsp;|&nbsp;&nbsp;CSS designed by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    </footer>
   </div>
-  
-</div>
-<!-- END Right side panel -->
-
-</div><br />
-<!-- END GRID -->
-
-</div>
-<!-- END w3-content -->
-
-<!-- Footer -->
-<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
-  <a href="https://jfan.ca" :class="['w3-tag w3-round w3-black w3-padding-large w3-margin-bottom', classLocationHostJFan]">« jfan »</a>
-  <a href="https://wzhao.ca" :class="['w3-tag w3-round w3-black w3-padding-large w3-margin-bottom', classLocationHostWZhao]">« wzhao »</a>
-  <p>Copyright &copy; 2012-2020&nbsp;&nbsp;<a href="/">J&W</a>&nbsp;&nbsp;|&nbsp;&nbsp;CSS designed by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer>
-
-</div>
-
-<script src="/js/jw.js"></script>
-
+  <script src="/js/jw.js"></script>
 </body>
 </html>
