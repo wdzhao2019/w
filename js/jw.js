@@ -44,6 +44,11 @@ var jw = new Vue({
       });
       return blog_body;
     },
+    blogView: function (blog) {
+      this.blogReading(blog);
+      this.view_blog = blog
+      $('html, body').animate({scrollTop: 700}, 'fast');
+    },
     blogReading: function (blog) {
       if (!this.reading_blogs.includes(blog.publishedAt)) this.reading_blogs.push(blog.publishedAt);
     },
