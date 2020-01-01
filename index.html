@@ -87,9 +87,9 @@
           <div class="w3-card w3-margin w3-white">
             <div class="w3-container">
               <p>
-                <span v-for="yearIndex in 7">
-                  <button :class="['w3-button w3-padding-small w3-border', classLoadedYear(2020-yearIndex)]" @click="gotoLoadedYear(2020-yearIndex)">
-                    {{ (2020-yearIndex).toString() }}
+                <span v-for="yearIndex in 8">
+                  <button :class="['w3-button w3-padding-small w3-border', classLoadedYear(2021-yearIndex)]" @click="gotoLoadedYear(2021-yearIndex)">
+                    {{ (2021-yearIndex).toString() }}
                   </button>&nbsp;
                 </span>
                 <span><button class="w3-button w3-padding-small w3-white w3-border" @click="scrollPageBottom()">&nbsp;»&nbsp;</button></span>
@@ -145,10 +145,10 @@
             <div class="w3-container">
               <p>
                 <span><button class="w3-button w3-padding-small w3-white w3-border" @click="scrollPageTop()">&nbsp;«&nbsp;</button></span>
-                <span v-for="yearIndex in 7">
+                <span v-for="yearIndex in 8">
                   &nbsp;
-                  <button :class="['w3-button w3-padding-small w3-border', classLoadedYear(2020-yearIndex)]" @click="gotoLoadedYear(2020-yearIndex)">
-                    {{ (2020-yearIndex).toString() }}
+                  <button :class="['w3-button w3-padding-small w3-border', classLoadedYear(2021-yearIndex)]" @click="gotoLoadedYear(2021-yearIndex)">
+                    {{ (2021-yearIndex).toString() }}
                   </button>
                 </span>
               </p>
@@ -195,15 +195,15 @@
               <h4>Archives</h4>
             </div>
             <div class="w3-container w3-white">
-              <div v-for="yearIndex in 7">
+              <div v-for="yearIndex in 8">
                 <span class="w3-tag w3-white w3-large w3-margin-top">
-                <button class="w3-button w3-padding-small w3-white w3-border" @click="loadJsonFiles(2020-yearIndex)">
-                  <span class="jw">&nbsp;</span>{{ (2020-yearIndex).toString() + ' ' + (year_loaded[(2020-yearIndex).toString()] ? '«' : '»') }}
+                <button class="w3-button w3-padding-small w3-white w3-border" @click="loadJsonFiles(2021-yearIndex)">
+                  <span class="jw">&nbsp;</span>{{ (2021-yearIndex).toString() + ' ' + (year_loaded[(2021-yearIndex).toString()] ? '«' : '»') }}
                 </button>
                 </span> 
                 <p class="w3-light-grey">
                   <div v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
-                    <span class="w3-light-grey w3-medium jw-jw" v-if="blog.publishedAt.startsWith((2020-yearIndex).toString())">
+                    <span class="w3-light-grey w3-medium jw-jw" v-if="blog.publishedAt.startsWith((2021-yearIndex).toString())">
                       <button class="w3-tag w3-light-grey w3-border" @click="blogView(blog)">{{ blog.publishedAt }}<span class="jw-wj">&nbsp;</span>{{ blog.title }}</button><br />
                     </span>
                   </div>
