@@ -41,6 +41,7 @@
               <p>&nbsp;</p>
               <h3><b>{{ view_blog.title }}</b></h3>
               <h5><span class="w3-opacity">{{ view_blog.publishedAt }}</span></h5>
+              <h4><span class="w3-greyscale" v-html="blog.description">{{ blog.description }}</span></h4>
               <p>&nbsp;</p>
             </div>
             <div class="w3-container">
@@ -195,16 +196,15 @@
             </div>
             <div class="w3-container w3-white">
               <div v-for="yearIndex in 7">
-                <span class="w3-tag w3-white w3-large w3-margin-top"><span class="jw">&nbsp;</span>
+                <span class="w3-tag w3-white w3-large w3-margin-top">
                 <button class="w3-button w3-padding-small w3-white w3-border" @click="loadJsonFiles(2020-yearIndex)">
-                  {{ (2020-yearIndex).toString() + ' ' + (year_loaded[(2020-yearIndex).toString()] ? '«' : '»') }}
+                  <span class="jw">&nbsp;</span>{{ (2020-yearIndex).toString() + ' ' + (year_loaded[(2020-yearIndex).toString()] ? '«' : '»') }}
                 </button>
                 </span> 
                 <p class="w3-light-grey">
                   <div v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
                     <span class="w3-light-grey w3-medium jw-jw" v-if="blog.publishedAt.startsWith((2020-yearIndex).toString())">
-                      <span class="jw-wj">&nbsp;</span>
-                      <button class="w3-tag w3-light-grey w3-border" @click="blogView(blog)">{{ blog.publishedAt + blog.title }}</button><br />
+                      <button class="w3-tag w3-light-grey w3-border" @click="blogView(blog)">{{ blog.publishedAt }}<span class="jw-wj">&nbsp;</span>{{ blog.title }}</button><br />
                     </span>
                   </div>
                 </p>
