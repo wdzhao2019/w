@@ -12,6 +12,7 @@ var jw = new Vue({
   mounted: function(){
     var year;
     for (year = 2020; year > 2012; year--) this.year_loaded[year.toString()] = false;
+    this.loadJsonFiles(2020);
     this.loadJsonFiles(2019);
   },
   methods: {
