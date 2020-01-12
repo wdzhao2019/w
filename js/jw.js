@@ -5,15 +5,17 @@ var jw = new Vue({
     year_loaded: {},
     view_blog: null,
     reading_blogs: [
-      '2019-10-27',
-      '2019-09-10'
+      '2020-01-01',
+      '2020-01-10'
     ]
   },
   mounted: function(){
     var year;
     for (year = 2020; year > 2012; year--) this.year_loaded[year.toString()] = false;
     this.loadJsonFiles(2020);
-    this.loadJsonFiles(2019);
+    year = 2019;
+    if (window.location.search.substring(1, 9) < "2020" && window.location.search.substring(1, 9) > "2013") year = Number(window.location.search.substring(1, 5));
+    this.loadJsonFiles(year);
   },
   methods: {
     loadJsonFiles: function (year) {
