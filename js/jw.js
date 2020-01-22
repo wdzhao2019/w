@@ -75,3 +75,11 @@ var jw = new Vue({
     }
   }
 });
+
+$(document).ready(function() {
+  $(".jw-ga").click(function(event) {
+    console.log("JW0|" + this.id);
+    gtag('event', 'ReadMore', { event_category: 'Blog', event_label: this.id, value: '1'});
+    console.log("JW1|" + this.id);
+  });
+});
