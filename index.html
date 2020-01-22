@@ -191,7 +191,7 @@
               <li class="w3-padding-16"  v-if="reading_blogs.includes(blog.publishedAt)">
                 <img :src="'https://jw.wj9.ca/images/' + blog.image + '.jpg'" alt="Image" class="w3-left w3-margin-right" style="width:50px" />
                 <span>{{ blog.publishedAt }}</span><br />
-                <button class="w3-tag w3-light-grey w3-padding-large w3-border" @click="blogView(blog)" v-bind:onclick="'ga(\'send\', \'event\', \'Blog\', \'Read\', \'' + blog.publishedAt + '\', \'' + blog.publishedAt + '\');'">{{ blog.title }}</button><br />
+                <button class="w3-tag w3-light-grey w3-padding-large w3-border" @click="blogView(blog)">{{ blog.title }}</button><br />
               </li>
             </ul>
           </div>
@@ -212,7 +212,7 @@
                 <p class="w3-light-grey">
                   <div v-for="blog in blogs.sort(function(a,b){return a.publishedAt>b.publishedAt?-1:(a.publishedAt<b.publishedAt?1:0);})">
                     <span class="w3-light-grey w3-medium jw-jw" v-if="blog.publishedAt.startsWith((2021-yearIndex).toString())">
-                      <button class="w3-tag w3-light-grey w3-border" @click="blogView(blog)" v-bind:onclick="'ga(\'send\', \'event\', \'Blog\', \'Read\', \'' + blog.publishedAt + '\', \'' + blog.publishedAt + '\');'">{{ blog.publishedAt }}<span class="jw-wj">&nbsp;</span>{{ blog.title }}</button><br />
+                      <button class="w3-tag w3-light-grey w3-border" @click="blogView(blog)">{{ blog.publishedAt }}<span class="jw-wj">&nbsp;</span>{{ blog.title }}</button><br />
                     </span>
                   </div>
                 </p>
