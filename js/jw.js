@@ -43,7 +43,7 @@ var jw = new Vue({
     blogBody: function (blog) {
       var blog_body = "";
       blog.body.forEach( function(line) {
-        blog_body += line.replace("<jw-img", "<img style='width:100%'").replace("data-pi='", "src='https://i.pinimg.com/originals/") + "<br />";
+        blog_body += line.replace("<jw-img", "<img style='width:100%'").replace("data-pa-", "src='https://cdn").replace("='jw/", ".picsart.com/") + "<br />";
       });
       return blog_body;
     },
