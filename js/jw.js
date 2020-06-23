@@ -6,7 +6,7 @@ var jw = new Vue({
     view_blog: null,
     reading_blogs: [
       '2020-01-01',
-      '2020-01-10'
+      '2020-06-22'
     ]
   },
   mounted: function(){
